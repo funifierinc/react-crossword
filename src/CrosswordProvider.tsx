@@ -785,7 +785,8 @@ const CrosswordProvider = React.forwardRef<
       React.ChangeEventHandler<HTMLInputElement>
     >((event) => {
       event.preventDefault();
-      setBulkChange(event.target.value);
+      console.log('crossword input change', event.target.value);
+      setBulkChange(event.target.value.normalize('NFD'));
     }, []);
 
     useEffect(() => {
