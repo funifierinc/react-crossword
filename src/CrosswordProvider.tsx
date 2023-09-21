@@ -663,7 +663,11 @@ const CrosswordProvider = React.forwardRef<
     // keyboard handling
     const handleSingleCharacter = useCallback(
       (char: string) => {
-        setCellCharacter(focusedRow, focusedCol, char.toUpperCase());
+        const normalizedChar = char
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+        console.log('handleSingleCharacter', { char, normalizedChar });
+        setCellCharacter(focusedRow, focusedCol, normalizedChar.toUpperCase());
         moveForward();
       },
       [focusedRow, focusedCol, setCellCharacter, moveForward]
